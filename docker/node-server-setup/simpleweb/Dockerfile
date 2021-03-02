@@ -4,11 +4,11 @@ FROM node:alpine
 # Create and set folder to place our code. So our project structure does not conflict with the file system.
 WORKDIR /usr/src
 
-# Install some depenedencies
+# Install some depenedencies. For our app to work properly we need at least our package.json
 COPY ./package.json ./
 RUN npm install
 
-# Copy the sources to the work directory
+# Copy the rest sources to the work directory. This should be at the end of our dockerfile to prevent cache busting.
 COPY ./ ./
 
 # Default command
