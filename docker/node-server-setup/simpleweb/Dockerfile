@@ -5,6 +5,7 @@ FROM node:alpine
 WORKDIR /usr/src
 
 # Install some depenedencies
+COPY ./package.json ./
 RUN npm install
 
 # Copy the sources to the work directory
