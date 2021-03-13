@@ -2,7 +2,7 @@
 FROM node:alpine
 
 # Create and set folder to place our code. So our project structure does not conflict with the file system.
-WORKDIR /usr/src
+WORKDIR /usr/src/app
 
 # Install some depenedencies. For our app to work properly we need at least our package.json
 COPY ./package.json ./
