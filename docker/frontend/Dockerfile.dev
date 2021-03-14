@@ -1,13 +1,19 @@
 FROM node:alpine
 
-WORKDIR '/usr/src/app'
+USER node
 
-COPY package.json .
+RUN mkdir -p /home/node/app
+
+WORKDIR /home/node/app
+
+COPY --chown=node:node ./package.json ./
 RUN npm install
-COPY . .
+COPY --chown=node:node ./ ./
 
 CMD ["npm", "run", "start"]
 
 # Run command with volumes to edit code directly:
 # sudo docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v ${pwd}:/usr/src/app IMAGE_NAME
 # the first volume arg says that we dont want to map this specific folder to the host so it dont get "overriden"
+# There is an issue with permissions in regards to Linux hosts (which includes Windows WSL2)
+# So the code must be placed in home of the node user and the package.json must be owned by node
